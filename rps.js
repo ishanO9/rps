@@ -19,56 +19,37 @@ function getHumanChoice()
     
 }
 let rounds = 5;
-/*function playGame(rounds)
-{
-    for(let i = 0; i < rounds; i++)
-    {
-        let humChoice = getHumanChoice();
-        let newhumchoice = humChoice.toLowerCase();
-        let compchoice = getComputerChoice();
-        console.log(newhumchoice);
-        playRound(newhumchoice,compchoice);
-    }
-    console.log(`Final score: You:${humanscore}  Computer:${compscore}`);
-    if(humanscore > compscore)
-    {
-        console.log("You win!");
-    }
-    else if(humanscore === compscore)
-    {
-        console.log("Its a tie!");
-    }
-    else
-    {
-        console.log("You lose!");
-    }
-}*/
+
    let humChoice;
-    //let newhumchoice = humChoice.toLowerCase();
     let compchoice;
-    //playRound(humChoice,compchoice);
+
 
 function playRound(humChoice,compchoice) //1:rock 2: paper 3: scissors
 {
 
 
         const p  = document.createElement("p");
-        let result = document.createElement("div");
-        let scores = document.createElement("p");
+        //let result = document.createElement("div");
+        
         let fresult = document.createElement("p");
+        let res = document.querySelector(".result");
+        let o = document.querySelector(".outcome");
+        o.textContent = `Computer picked ${compchoice}!`;
+        let scores = document.createElement("p");
+        
+        //div.append(p,scores);
 
-        p.textContent = `Computer picked ${compchoice}!`;
         switch(humChoice)
             {
                 case "rock":
                     switch(compchoice)
                     {
-                        case "rock": result.textContent = `It is a Tie!`;
+                        case "rock": o.textContent += `It is a Tie!`;
                             break;
-                        case "paper": result.textContent = "You Lose!";
+                        case "paper": o.textContent += "You Lose!";
                             compscore+=1;
                             break;
-                        case "scissors": result.textContent= "You Win!";
+                        case "scissors": o.textContent += "You Win!";
                             humanscore+=1;
                             break;
                     }
@@ -77,12 +58,12 @@ function playRound(humChoice,compchoice) //1:rock 2: paper 3: scissors
                 case "paper":
                     switch(compchoice)
                     {
-                        case "rock": result.textContent= "You Win!";
+                        case "rock": o.textContent += "You Win!";
                             humanscore+=1;
                             break;
-                        case "paper": result.textContent = `It is a Tie!`;
+                        case "paper": o.textContent += `It is a Tie!`;
                             break;
-                        case "scissors": result.textContent = "You Lose!";
+                        case "scissors": o.textContent += "You Lose!";
                             compscore+=1;
                             break;
                     }
@@ -91,48 +72,43 @@ function playRound(humChoice,compchoice) //1:rock 2: paper 3: scissors
                 case "scissors":
                     switch(compchoice)
                     {
-                        case "paper": result.textContent= "You Win!";
+                        case "paper": o.textContent += "You Win!";
                             humanscore+=1;
                             break;
-                        case "scissors": result.textContent = `It is a Tie!`;
+                        case "scissors": o.textContent += `It is a Tie!`;
                             break;
-                        case "rock": result.textContent = "You Lose!";
+                        case "rock": o.textContent += "You Lose!";
                             compscore+=1;
                             break;
                     }
                     break;
             }
     
-
-        scores.textContent = `Your score: ${humanscore}\nComputer score: ${compscore}`;
+        
+        res.textContent = `Your score: ${humanscore} Computer score: ${compscore}`;
+        //scores.textContent = `Your score: ${humanscore}\nComputer score: ${compscore}`;
         
         if(humanscore === 5)
         {
-            fresult.textContent = `Final Score: You: ${humanscore}\nComputer: ${compscore}\nWinner: You!`;
-            div.append(p,result,scores,fresult);
+            fresult.textContent = `Winner: You!`;
+            end.append(scores,fresult);
             return `GAME OVER`;
           
         } 
         else if(compscore === 5)
         {
-            fresult.textContent = `Final Score: You: ${humanscore}\nComputer: ${compscore}\nWinner: Computer!`;
-            div.append(p,result,scores,fresult);
+            fresult.textContent = `Winner: Computer!`;
+            end.append(scores,fresult);
             return 'GAME OVER';
 
-        }
-                
-        div.append(p,result,scores,fresult);
-        
+        }    
     }
-//playGame(rounds);
-
-
 
 const body = document.querySelector("body");
 const div = document.querySelector("div");
+const end = document.querySelector(".end");
 let buttons = document.querySelectorAll("button");
 let button2 = document.createElement("button");
-buttons
 
 let gameover;
 
@@ -149,7 +125,7 @@ let gameover;
                 let gm = document.createElement("p");
                 gm.textContent = gameover;
                 button2.textContent = "Play Again?";
-                div.append(gm,button2);
+                end.append(gm,button2);
                 deleteButtons();
 
             }
@@ -164,8 +140,6 @@ function deleteButtons()
         button.disabled = true;
     })
 }
-
-
 
 button2.addEventListener("click",()=>{
     
