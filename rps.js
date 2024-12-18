@@ -132,36 +132,44 @@ const body = document.querySelector("body");
 const div = document.querySelector("div");
 let buttons = document.querySelectorAll("button");
 let button2 = document.createElement("button");
+buttons
 
-
+let gameover;
 
     buttons.forEach((button) => {
-        button.addEventListener("click", (e) =>{
+        button.addEventListener("click", () =>{
             console.log('click');
     
             humChoice = button.textContent.toLowerCase();
             compchoice = getComputerChoice();
         
-            let gameover = playRound(humChoice,compchoice);
+            gameover = playRound(humChoice,compchoice);
             if(gameover === 'GAME OVER')
             {
                 let gm = document.createElement("p");
                 gm.textContent = gameover;
-                gameover = '';
-                humanscore = 0;
-                compscore = 0;
                 button2.textContent = "Play Again?";
                 div.append(gm,button2);
-                
-            }
-        });
-    }
+                deleteButtons();
 
+            }
+        }
+    );
+    }
 );
+
+function deleteButtons()
+{
+    buttons.forEach((button) =>{
+        button.disabled = true;
+    })
+}
+
+
 
 button2.addEventListener("click",()=>{
     
-    div.remove();
+    location.reload();
 
 });
 
